@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: gitops-demo
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: gitops-demo
+
+  template:
+
+    metadata:
+      labels:
+        app: gitops-demo
+
+    spec:
+
+      containers:
+
+      - name: gitops-demo
+
+        image: asia-south1-docker.pkg.dev/vishnu-cloud-lab/gitops-images/gitops-demo:v1
+
+        ports:
+        - containerPort: 80
