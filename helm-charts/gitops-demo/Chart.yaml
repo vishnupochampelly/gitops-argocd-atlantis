@@ -1,0 +1,9 @@
+apiVersion: v2
+name: gitops-demo
+description: Sample GitOps application deployed on Google Kubernetes Engine
+
+type: application
+
+version: 0.1.0
+
+appVersion: "v1"
