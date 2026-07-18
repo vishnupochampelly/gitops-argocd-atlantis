@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: gitops-demo
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/vishnupochampelly/gitops-argocd-atlantis.git
+    targetRevision: main
+    path: helm-charts/gitops-demo
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
