@@ -1,0 +1,54 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.SERVICE_ACCOUNT }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker
+        run: |
+          gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet
+
+      - name: Build Docker Image
+        run: |
+          docker build -t asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.GAR_REPOSITORY }}/${{ vars.IMAGE_NAME }}:${{ github.sha }} ./app
+
+      - name: Push Docker Image
+        run: |
+          docker push asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.GAR_REPOSITORY }}/${{ vars.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Update Helm values.yaml
+        run: |
+          sed -i "s/tag:.*/tag: \"${{ github.sha }}\"/" helm-charts/gitops-demo/values.yaml
+
+      - name: Commit Updated Helm Chart
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add helm-charts/gitops-demo/values.yaml
+
+          git diff --cached --quiet || git commit -m "ci: update image tag"
+
+          git push
