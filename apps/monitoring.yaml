@@ -16,6 +16,10 @@ spec:
     helm:
       releaseName: prometheus
 
+      values: |
+        crds:
+          enabled: false
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
@@ -27,3 +31,4 @@ spec:
 
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
