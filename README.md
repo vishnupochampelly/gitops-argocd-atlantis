@@ -1,138 +1,277 @@
-# GitOps Platform on Google Cloud
+# 🚀 GitOps Platform on Google Cloud
 
-A production-inspired GitOps platform built on Google Cloud Platform using Terraform, Kubernetes, Docker, Helm, ArgoCD, GitHub Actions, and Atlantis.
+A production-inspired cloud-native platform built on **Google Cloud Platform (GCP)** using **Terraform**, **Google Kubernetes Engine (GKE)**, **GitHub Actions**, **Argo CD**, **Helm**, **Prometheus**, **Grafana**, and **Atlantis**.
 
----
-
-# Project Goals
-
-This project demonstrates how to build a complete cloud-native platform from scratch using Infrastructure as Code and GitOps principles.
-
-The objective is to automate infrastructure provisioning, application deployment, and continuous delivery using industry-standard DevOps tools.
+This project demonstrates how modern Platform Engineering and GitOps practices can be implemented using industry-standard DevOps tools.
 
 ---
 
-# Tech Stack
+# 📌 Project Overview
 
-- Google Cloud Platform (GCP)
-- Terraform
-- Google Kubernetes Engine (GKE)
-- Artifact Registry (GAR)
-- Docker
-- Kubernetes
-- Helm
-- ArgoCD
-- GitHub Actions
-- Atlantis
-- Prometheus
-- Grafana
+This repository automates the complete software delivery lifecycle:
+
+- Infrastructure Provisioning
+- Container Image Build
+- Continuous Integration
+- Artifact Management
+- GitOps-based Continuous Deployment
+- Kubernetes Orchestration
+- Infrastructure Monitoring
+
+The entire deployment pipeline follows GitOps principles where **Git is the single source of truth**.
 
 ---
 
-# Architecture
+# 🛠 Tech Stack
+
+| Category | Technology |
+|-----------|------------|
+| Cloud | Google Cloud Platform |
+| IaC | Terraform |
+| Container Platform | Google Kubernetes Engine (GKE) |
+| Container Registry | Google Artifact Registry |
+| Containerization | Docker |
+| Orchestration | Kubernetes |
+| Package Management | Helm |
+| GitOps | Argo CD |
+| CI | GitHub Actions |
+| Authentication | Workload Identity Federation (OIDC) |
+| Monitoring | Prometheus |
+| Visualization | Grafana |
+| Terraform Automation | Atlantis |
+
+---
+
+# 🏗 Architecture
 
 ```
-GitHub
-   │
-   ▼
-GitHub Actions
-   │
-   ▼
-Docker Build
-   │
-   ▼
-Artifact Registry
-   │
-   ▼
-Google Kubernetes Engine
-   │
-   ▼
-Application
+
+                    Developer
+                        │
+                  git push
+                        │
+                        ▼
+                GitHub Repository
+                        │
+                        ▼
+                GitHub Actions (CI)
+                        │
+         ┌──────────────┴──────────────┐
+         │                             │
+         ▼                             ▼
+ Build Docker Image            Update Helm values.yaml
+         │                             │
+         ▼                             ▼
+ Google Artifact Registry        Commit Image Tag
+         │                             │
+         └──────────────┬──────────────┘
+                        │
+                        ▼
+                  Argo CD (GitOps)
+                        │
+                        ▼
+                Google Kubernetes Engine
+                        │
+          ┌─────────────┴─────────────┐
+          ▼                           ▼
+     Kubernetes Service         Prometheus
+          │                           │
+          ▼                           ▼
+     LoadBalancer                 Grafana
+          │
+          ▼
+    End Users / Browser
+
 ```
-
-Infrastructure is provisioned using Terraform.
-
-Applications are deployed using Kubernetes, Helm, and ArgoCD.
 
 ---
 
-# Repository Structure
+# 📂 Repository Structure
 
 ```
 gitops-argocd-atlantis/
 │
-├── app/                # Sample Docker application
+├── .github/
+│   └── workflows/
+│       └── build-and-deploy.yml
 │
-├── terraform/          # Infrastructure as Code
+├── app/
+│   ├── Dockerfile
+│   └── index.html
 │
-├── argocd/             # ArgoCD manifests
+├── terraform/
 │
-├── helm-charts/        # Helm Charts
+├── helm-charts/
+│   └── gitops-demo/
 │
-├── monitoring/         # Prometheus & Grafana
+├── argocd/
 │
-├── architecture/       # Architecture diagrams
+├── monitoring/
 │
-├── docs/               # Documentation
+├── docs/
+│
+├── architecture/
 │
 └── README.md
 ```
 
 ---
 
-# Infrastructure Created
+# ⚙ Infrastructure Provisioned
 
-- VPC Network
+Terraform provisions the following resources:
+
+- Custom VPC
 - Custom Subnet
 - Secondary IP Ranges
 - Google Kubernetes Engine
 - Node Pool
 - Artifact Registry
+- IAM Roles
 - Required Google APIs
 
 ---
 
-# Current Progress
+# 🚀 CI/CD Workflow
 
-- [x] Git Repository
-- [x] Terraform Setup
-- [x] Google Provider
-- [x] Variables
-- [x] VPC
-- [x] Subnet
-- [x] GKE Cluster
-- [x] Node Pool
-- [x] Artifact Registry
-- [x] Docker Image
-- [x] Push Image to GAR
-
-Upcoming
-
-- [ ] Kubernetes Deployment
-- [ ] Kubernetes Service
-- [ ] Helm Charts
-- [ ] ArgoCD
-- [ ] GitHub Actions
-- [ ] Atlantis
-- [ ] Prometheus
-- [ ] Grafana
+```
+Developer
+      │
+git push
+      │
+      ▼
+GitHub Actions
+      │
+      ├── Authenticate using OIDC
+      ├── Build Docker Image
+      ├── Push Image to Artifact Registry
+      ├── Update Helm values.yaml
+      ├── Commit Image Tag
+      ▼
+GitHub Repository
+      ▼
+Argo CD
+      ▼
+Google Kubernetes Engine
+      ▼
+Application Deployment
+```
 
 ---
 
-# Learning Objectives
+# 📊 Monitoring Stack
 
-This repository is designed to understand:
+The platform includes:
+
+- Prometheus
+- Grafana
+- Alertmanager
+- Node Exporter
+- kube-state-metrics
+
+Grafana provides dashboards for:
+
+- Cluster Health
+- CPU Usage
+- Memory Usage
+- Pod Monitoring
+- Node Monitoring
+- Kubernetes Resources
+
+---
+
+# ✅ Features
+
+- Infrastructure as Code (Terraform)
+- GitOps Deployment using Argo CD
+- Continuous Integration with GitHub Actions
+- Secure Authentication using Workload Identity Federation (OIDC)
+- Docker Image Build & Push
+- Automated Helm Image Updates
+- Kubernetes Deployment
+- LoadBalancer Service
+- Prometheus Monitoring
+- Grafana Dashboards
+
+---
+
+# 📈 Current Project Status
+
+| Component | Status |
+|------------|--------|
+| Terraform | ✅ |
+| GKE | ✅ |
+| Artifact Registry | ✅ |
+| Docker | ✅ |
+| Kubernetes | ✅ |
+| Helm | ✅ |
+| Argo CD | ✅ |
+| GitHub Actions | ✅ |
+| GitOps Deployment | ✅ |
+| Prometheus | ✅ |
+| Grafana | ✅ |
+| Atlantis | 🚧 |
+
+---
+
+# 📚 Learning Outcomes
+
+This project demonstrates practical experience with:
 
 - Infrastructure as Code
-- Docker Containerization
-- Kubernetes
+- Kubernetes Administration
 - GitOps
-- Continuous Delivery
+- Continuous Integration
+- Continuous Deployment
 - Cloud Networking
 - Platform Engineering
+- Observability
+- Monitoring
+- Kubernetes Troubleshooting
 
 ---
 
-# Author
+# 🚀 Future Enhancements
 
-Vishnu Pochampelly
+- Horizontal Pod Autoscaler (HPA)
+- Ingress Controller
+- HTTPS with Managed Certificates
+- External Secrets Operator
+- GCP Secret Manager Integration
+- Argo Rollouts (Blue-Green / Canary)
+- Multi-Environment Deployment (Dev / Stage / Prod)
+
+---
+
+# 👨‍💻 Author
+
+**Vishnu Pochampalli**
+
+Cloud | DevOps | Platform Engineer | Site Reliability Engineer (SRE)
+
+
+
+
+
+
+
+
+
+
+![Terraform](https://img.shields.io/badge/Terraform-IaC-623CE4?logo=terraform)
+
+![GCP](https://img.shields.io/badge/Google_Cloud-GCP-4285F4?logo=googlecloud)
+
+![Kubernetes](https://img.shields.io/badge/Kubernetes-GKE-326CE5?logo=kubernetes)
+
+![Docker](https://img.shields.io/badge/Docker-Containers-2496ED?logo=docker)
+
+![Helm](https://img.shields.io/badge/Helm-Charts-0F1689?logo=helm)
+
+![ArgoCD](https://img.shields.io/badge/ArgoCD-GitOps-EF7B4D)
+
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-2088FF?logo=githubactions)
+
+![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-E6522C?logo=prometheus)
+
+![Grafana](https://img.shields.io/badge/Grafana-Dashboard-F46800?logo=grafana)
