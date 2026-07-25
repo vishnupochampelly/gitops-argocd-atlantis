@@ -19,7 +19,7 @@ resource "google_container_cluster" "primary" {
 
   remove_default_node_pool = true
 
-  initial_node_count = 1
+  initial_node_count = 2
 
   ##########################################################
   # GKE IP Allocation
