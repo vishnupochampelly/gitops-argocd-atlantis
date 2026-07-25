@@ -10,7 +10,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
   cluster = google_container_cluster.primary.name
 
-  node_count = 1
+  node_count = 2
 
   node_config {
 
