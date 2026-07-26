@@ -10,7 +10,7 @@ replicaCount: 1
 
 image:
   repository: asia-south1-docker.pkg.dev/vishnu-cloud-lab/gitops-images/gitops-demo
-  tag: "fdabaf3680470d02143fa0a4d36e020f2161c5c5"
+  tag: "7c0e4d9b1311c224c4cc18b6596dc62f22c14e02"
   pullPolicy: Always
 
 ##########################################################
