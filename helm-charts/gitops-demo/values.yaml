@@ -65,7 +65,7 @@ ingress:
   annotations: {}
 
   hosts:
-    - host: ""  #After buying domain change to  app.vishnucloud.dev
+    - host: app.vishnupochampalli.work.gd
       paths:
         - path: /
           pathType: Prefix

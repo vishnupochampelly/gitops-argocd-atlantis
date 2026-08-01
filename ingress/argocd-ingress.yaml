@@ -9,7 +9,7 @@ spec:
   ingressClassName: nginx
 
   rules:
-    - host: argo.local  #After buying domain chane to  argo.vishnucloud.dev
+    - host: argo.vishnupochampalli.work.gd
       http:
         paths:
           - path: /

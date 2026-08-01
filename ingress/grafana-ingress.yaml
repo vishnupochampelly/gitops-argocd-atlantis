@@ -9,7 +9,7 @@ spec:
   ingressClassName: nginx
 
   rules:
-    - host: grafana.local #After buying domain change to  grafana.vishnucloud.dev
+    - host: grafana.vishnupochampalli.work.gd
       http:
         paths:
           - path: /
