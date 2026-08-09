@@ -1,26 +1,28 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+# refer apps/gitpops-demo.yaml for the application definition of gitops-demo app. This is a root application that will deploy all the applications defined in apps folder.
 
-metadata:
-  name: gitops-demo
-  namespace: argocd     
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
 
-spec:
-  project: default
+# metadata:
+#   name: gitops-demo
+#   namespace: argocd     
 
-  source:
-    repoURL: https://github.com/vishnupochampelly/gitops-argocd-atlantis.git
-    targetRevision: main
-    path: helm-charts/gitops-demo
+# spec:
+#   project: default
 
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
+#   source:
+#     repoURL: https://github.com/vishnupochampelly/gitops-argocd-atlantis.git
+#     targetRevision: main
+#     path: helm-charts/gitops-demo
 
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: default
 
-    syncOptions:
-      - CreateNamespace=true
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+
+#     syncOptions:
+#       - CreateNamespace=true

@@ -130,8 +130,10 @@ kubectl apply -n argocd \
 # Deploy Application
 
 ```bash
-kubectl apply -f argocd/application.yaml
+kubectl apply -f argocd/app-of-apps.yaml
 ```
+
+This applies the root Argo CD app, which then discovers and syncs the manifests under the apps directory, including apps/gitops-demo.yaml.
 
 ---
 
