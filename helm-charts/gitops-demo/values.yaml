@@ -70,7 +70,10 @@ ingress:
         - path: /
           pathType: Prefix
 
-  tls: []
+  tls:
+    - secretName: gitops-staging-tls
+      hosts:
+        - app.vishnupochampalli.work.gd
 
 ##########################################################
 # Autoscaling
