@@ -62,7 +62,8 @@ ingress:
 
   className: nginx
 
-  annotations: {}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 
   hosts:
     - host: app.vishnupochampalli.work.gd
