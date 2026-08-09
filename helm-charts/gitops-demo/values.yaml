@@ -63,7 +63,7 @@ ingress:
   className: nginx
 
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 
   hosts:
     - host: app.vishnupochampalli.work.gd
@@ -72,7 +72,7 @@ ingress:
           pathType: Prefix
 
   tls:
-    - secretName: gitops-staging-tls
+    - secretName: gitops-prod-tls
       hosts:
         - app.vishnupochampalli.work.gd
 
