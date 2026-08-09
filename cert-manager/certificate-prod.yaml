@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitops-prod-tls
+  namespace: default
+spec:
+  secretName: gitops-prod-tls
+
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+
+  dnsNames:
+    - app.vishnupochampalli.work.gd
+
+  privateKey:
+    rotationPolicy: Always
