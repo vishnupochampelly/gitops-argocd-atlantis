@@ -16,6 +16,11 @@ spec:
     helm:
       releaseName: ingress-nginx
 
+      values: |
+        controller:
+          config:
+            strict-validate-path-type: "false"
+
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
