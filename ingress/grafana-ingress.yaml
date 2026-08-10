@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: grafana-ingress
   namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 
 spec:
   ingressClassName: nginx
@@ -14,9 +16,13 @@ spec:
         paths:
           - path: /
             pathType: Prefix
-
             backend:
               service:
                 name: prometheus-grafana
                 port:
                   number: 80
+
+  tls:
+    - hosts:
+        - grafana.vishnupochampalli.work.gd
+      secretName: grafana-prod-tls
